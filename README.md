@@ -1,5 +1,5 @@
-# LLSA
-These codes are for our paper "Local Lanczos Spectral Approximation for Community Detection"
+# LBSA
+These codes are for our paper "Locally-biased Spectral Approximation for Community Detection"
 ## Requirements
 Before compiling codes, the following software should be installed in your system.
 - Matlab
@@ -12,20 +12,28 @@ Before compiling codes, the following software should be installed in your syste
 - nodes: 334863, edges: 925872 
 - nodes are products, edges are co-purchase relationships
 - top 5000 communities with ground truth size >= 3
-## How to run LLSA algorithm
+## How to run LBSA algorithm
 ```
-$ cd LLSA_codes 
+$ cd LBSA_codes 
 $ matlab 
-$ mex -largeArrayDims GetLocalCond.c   % compile the mex file 
-$ mex -largeArrayDims hkgrow_mex.cpp   % compile the mex file 
-$ LLSA(k,alpha) 
+$ mex -largeArrayDims GetLocalCond.cpp   % compile the mex file 
+$ mex -largeArrayDims rwvec_mex.cpp   % compile the mex file 
+$ mex -largeArrayDims pprvec_mex.cpp   % compile the mex file 
+$ mex -largeArrayDims hkvec_mex.cpp   % compile the mex file 
+$ LBSA(sampleMode,algsMode) 
 ```
-### Command Options for LLSA algorithm:
+### Command Options for LBSA algorithm:
 
-k: number of Lanczos iteration (default: 4)
+sampleMode: sampling method (random walk, personalized PageRank and heat kernel diffusion)
 
-alpha: a parameter controls local minimal conductance (default: 1.03)
+algsMode: locally-biased spectral approximation algorithm (Lanczos method or power iteration)
 ## How to run baseline algorithms
+### run LEMON algorithm
+```
+$ cd LEMON_codes 
+$ matlab 
+$ LEMON
+```
 ### run LOSP algorithm
 ```
 $ cd LOSP_codes 
@@ -69,6 +77,7 @@ Please cite our papers if you use the codes in your paper:
 ```
 ### Acknowledgement
 In the program, we incorporate some open source codes as baseline algorithms from the following websites:
+- [LEMON](https://github.com/yixuanli/lemon)
 - [LOSP](https://github.com/KunHe2015/LOSP)
 - [HK](https://github.com/kkloste/hkgrow)
 - [PR](https://www.cs.purdue.edu/homes/dgleich/codes/neighborhoods/)
