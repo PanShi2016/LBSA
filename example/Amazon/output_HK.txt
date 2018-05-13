@@ -1,4 +1,3 @@
 The detected community is
-325246	257932	175959	185815	77764	41338	202326	271852	312210
-The F1 score between detected community and ground truth community is
-0.800
+311829	178655	86239	326091	47908	173661	206097	191312	74001	323273	270973	221265	205989	268156	90455	100246	264863	225254	215543
+The F1 score and Jaccard index between detected community and ground truth community are 0.882 and 0.789

@@ -1,4 +1,4 @@
-function [bestF1s,findCommSize] = getMinResult(conductances,bestF1,findCommSizes)
+function [bestJaccardindex,bestF05s,bestF1s,bestF2s,bestprecisions,bestrecalls,findCommSize,bestcond] = getMinResult(conductances,bestJaccard,bestF05,bestF1,bestF2,bestprecision,bestrecall,findCommSizes)
 % return the best F1 with the min conductance
 
 bestF1s = [];
@@ -29,7 +29,12 @@ for i = 1 : SIZE1
     if m > length(bestF1)
         m = length(bestF1);
     end
+    bestJaccardindex(i) = bestJaccard(i,m);
+    bestF05s(i) = bestF05(i,m);
     bestF1s(i) = bestF1(i,m);
+    bestF2s(i) = bestF2(i,m);
+    bestprecisions(i) = bestprecision(i,m);
+    bestrecalls(i) = bestrecall(i,m);
 	findCommSize(i) = findCommSizes(i,m);
     bestcond(i) = conductances(i,m);
 end

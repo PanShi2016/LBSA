@@ -30,24 +30,23 @@ subgraph = graph(sample,sample);
 
 if TruncateMode == 1
     % bound detected community by truth community size
-    [F1,detectedComm] = IterativeWorkTruth(graph,subgraph,ind,sample,comm{commId});
+    [Jaccard,F05,F1,F2,P,R,Size,Cond,detectedComm] = IterativeWorkTruth(graph,subgraph,ind,sample,comm{commId});
 end
 
 if TruncateMode == 2
     % bound detected community by local minimal conductance
-    [F1,detectedComm] = IterativeWorkConduct(graph,subgraph,ind,sample,comm{commId});
+    [Jaccard,F05,F1,F2,P,R,Size,Cond,detectedComm] = IterativeWorkConduct(graph,subgraph,ind,sample,comm{commId});
 end
 
 % printing out result
 fprintf('The detected community is')
 disp(detectedComm')
-fprintf('The F1 score between detected community and ground truth community is %.3f\n',F1)
+fprintf('The F1 score and Jaccard index between detected community and ground truth community are %.3f and %.3f\n',F1,Jaccard)
 
 % save out result
 savePathandName = '../../example/Amazon/output_LOSP.txt';
 dlmwrite(savePathandName,'The detected community is','delimiter','');
 dlmwrite(savePathandName,detectedComm','-append','delimiter','\t','precision','%.0f');
-dlmwrite(savePathandName,'The F1 score between detected community and ground truth community is','-append','delimiter','');
-dlmwrite(savePathandName,F1,'-append','delimiter','\t','precision','%.3f');
+dlmwrite(savePathandName,['The F1 score and Jaccard index between detected community and ground truth community are ' num2str(F1,'%.3f') ' and ' num2str(Jaccard,'%.3f')],'-append','delimiter','');
 
 end

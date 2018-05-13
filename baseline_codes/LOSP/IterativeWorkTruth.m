@@ -1,4 +1,4 @@
-function [truthF1score,detectedComm] = IterativeWorkTruth(graph,subgraph,initialStartSeeds,sample,groundTruthComm,dist,dim,step)
+function [truthJaccard,truthF05score,truthF1score,truthF2score,truthprecision,truthrecall,truthsize,truthcond,detectedComm] = IterativeWorkTruth(graph,subgraph,initialStartSeeds,sample,groundTruthComm,dist,dim,step)
 % use truth size to decide the community size
 
 % Start from initialStartSeeds
@@ -65,7 +65,7 @@ while(iter<=3 || conductances(iter-1) <= conductances(iter-2) && iter<10)
         else
             detectedComm = sample(I(1:length(groundTruthComm)));
         end
-        truthF1(iter) = testsubgraph(detectedComm,groundTruthComm);
+        [truthJaccard(iter),truthF05(iter),truthF1(iter),truthF2(iter),truthprecision(iter),truthrecall(iter)] = testsubgraph(detectedComm,groundTruthComm);
         truthsize(iter) = length(detectedComm);
         conductance(iter) = getConductance(graph,detectedComm);
         if(totalStartNum <= sampleSize - delta)
@@ -84,7 +84,7 @@ while(iter<=3 || conductances(iter-1) <= conductances(iter-2) && iter<10)
         else
             detectedComm = sample(I(1:length(groundTruthComm)));
         end
-        truthF1(iter) = testsubgraph(detectedComm,groundTruthComm);
+        [truthJaccard(iter),truthF05(iter),truthF1(iter),truthF2(iter),truthprecision(iter),truthrecall(iter)] = testsubgraph(detectedComm,groundTruthComm);
         truthsize(iter) = length(detectedComm);
         conductance(iter) = getConductance(graph,detectedComm);
         break;
@@ -92,7 +92,14 @@ while(iter<=3 || conductances(iter-1) <= conductances(iter-2) && iter<10)
     oldv = v;
 end
 
+truthJaccard = mean(truthJaccard);
+truthF05score = mean(truthF05);
 truthF1score = mean(truthF1);
+truthF2score = mean(truthF2);
+truthprecision = mean(truthprecision);
+truthrecall = mean(truthrecall);
+truthsize = mean(truthsize);
+truthcond = mean(conductance);
 
 end
 
