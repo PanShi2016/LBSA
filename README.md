@@ -30,13 +30,13 @@ algsMode: locally-biased spectral approximation algorithm (Lanczos method or pow
 ## How to run baseline algorithms
 ### run LEMON algorithm
 ```
-$ cd LEMON_codes 
+$ cd baseline_codes/LEMON
 $ matlab 
 $ LEMON
 ```
 ### run LOSP algorithm
 ```
-$ cd LOSP_codes 
+$ cd baseline_codes/LOSP 
 $ matlab 
 $ LOSP
 ```
